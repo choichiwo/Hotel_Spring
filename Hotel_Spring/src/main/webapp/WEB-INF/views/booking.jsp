@@ -71,5 +71,12 @@
         </div><!-- choicesystem -->
     </main>
     </div><!--container -->
+<%
+	String loginid=(String)session.getAttribute("loginid");
+	out.println(loginid);
+	if(!loginid.equals("xaexal")){
+		response.sendRedirect("login");
+	}
+%>    
 </body>
 </html>
