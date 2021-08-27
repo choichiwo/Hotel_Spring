@@ -53,20 +53,25 @@ public class HomeController {
 //		model.addAttribute("userpw", userpw);
 //		return "viewinfo";
 //	}
-	@RequestMapping(value="/booking", method=RequestMethod.POST)
+	@RequestMapping(value="/check_user", method=RequestMethod.POST)
 	   public String go_room(HttpServletRequest hsr, Model model) {
 	      String userid = hsr.getParameter("userid");
 	      String userpw = hsr.getParameter("userpw");
 	      model.addAttribute("userid", userid);
 	      model.addAttribute("userpw", userpw);
-	      HttpSession session = hsr.getSession();
+	      HttpSession session = hsr.getSession(); // session 사용가능하게 함
 		  session.setAttribute("loginid", userid);
-	      return "booking";
+	      return "redirect:/booking"; // RequestMapping의 경로이름
 	   }
-	   @RequestMapping("/booking")
-	   public String goRoom() {
-	      return "booking";
+	@RequestMapping(value="/booking", method=RequestMethod.GET)
+	   public String booking() {
+	      return "booking"; // JSP 화일이름
 	   }
+	
+   @RequestMapping("/booking")
+   public String goRoom() {
+      return "booking";
+   }
 
 	@RequestMapping("/home")
 	public String goHome() {
