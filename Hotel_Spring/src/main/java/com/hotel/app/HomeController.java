@@ -60,12 +60,19 @@ public class HomeController {
 	      model.addAttribute("userid", userid);
 	      model.addAttribute("userpw", userpw);
 	      HttpSession session = hsr.getSession(); // session 사용가능하게 함
-		  session.setAttribute("loginid", userid);
+	      session.setAttribute("loginid", userid);
 	      return "redirect:/booking"; // RequestMapping의 경로이름
 	   }
 	@RequestMapping(value="/booking", method=RequestMethod.GET)
-	   public String booking() {
-	      return "booking"; // JSP 화일이름
+	   public String booking(HttpServletRequest hrs) {
+		HttpSession session = hrs.getSession();
+		String loginid = (String)session.getAttribute("loginid");
+		if(loginid.equals("1234")) {
+			return "booking";
+		}
+		else {
+			return "redirect:/home";
+		}
 	   }
 	
    @RequestMapping("/booking")
@@ -81,16 +88,27 @@ public class HomeController {
 	public String goJoin() {
 		return "newbie";
 	}
-	@RequestMapping(value="/newinfo", method=RequestMethod.POST)
+	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String newinfo(@ModelAttribute("pl") ParamList pl) {
-		return "newinfo";
+		return "home";
 	}
 	@RequestMapping("/room")
-	   public String go_reservation() {
+	   public String go_reservation(HttpServletRequest hsr) {
+		HttpSession session = hsr.getSession();
+		if(session.getAttribute("loginid")==null) {
+			return "redirect:/home";
+		}
 	      return "room";
 	   }
-	   @RequestMapping("show_all")
-	   public String show_all() {
-	      return "show_all";
+	@RequestMapping("/logout")
+	   public String logout(HttpServletRequest hsr) {
+		HttpSession session = hsr.getSession();
+		session.invalidate();
+	      return "redirect:/";
 	   }
+	
+   @RequestMapping("show_all")
+   public String show_all() {
+      return "show_all";
+   }
 }

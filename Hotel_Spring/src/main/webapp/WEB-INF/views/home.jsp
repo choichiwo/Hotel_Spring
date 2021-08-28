@@ -9,7 +9,12 @@
 <h1 style="text-align: center">
 	Hotel Manager Home 
 </h1><hr>
-<h3 style="text-align: center"><a href="login">로그인</a></h3>
+<div style="text-align: center">
+<form method="POST" action="/app/check_user">
+	ID : <input type=text name=userid required><br>
+	PW : <input type=text name=userpw required><br>
+	<input type=submit value="로그인">	
+</form></div>
 <h3 style="text-align: center"><a href="newbie">회원가입</a></h3>
 </body>
 </html>

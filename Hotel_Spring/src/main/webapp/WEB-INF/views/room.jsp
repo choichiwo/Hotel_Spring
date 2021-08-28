@@ -17,7 +17,7 @@
                 <ul class="menu">
                     <li><a href="room">객실관리</a></li>
                 	<li><a href="booking">예약관리</a></li>
-                	<li><a href="home">로그아웃</a></li>
+                	<li><a href="logout">로그아웃</a></li>
                 </ul>
              </div><!--gnav-->
         </header>
