@@ -111,7 +111,7 @@ public class HomeController {
 
 		ArrayList<Roomtype> roomtype=room.getRoomType();
 		model.addAttribute("roomType",roomtype);
-	      return "room";
+	      return "room"; 
 	   }
 	@RequestMapping("/logout")
 	   public String logout(HttpServletRequest hsr) {

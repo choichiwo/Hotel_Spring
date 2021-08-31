@@ -4,7 +4,9 @@
 <!-- namespace="인터페이스이 경로명+이름" -->
 <mapper namespace="com.hotel.app.IRoom">
 	<select id="getRoomList" resultType="com.hotel.app.Roominfo">
-		select roomcode, name, type, howmany, howmuch from room order by name
+		select a.roomcode,a.name roomname,b.name typename,a.howmany,a.howmuch
+		from room a,roomtype b
+		where a.type=b.typecode
 	</select>
 	<select id="getRoomType" resultType="com.hotel.app.Roomtype">
 		select name, typecode from roomtype order by typecode
