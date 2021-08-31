@@ -33,24 +33,24 @@
                     <tr>
                         <th class="bunlyu">객실분류</th>
                         <td>
-                            <select name="possible_day" id="">
+                            <select name="possible_day" id=""> 
                                 <option value="" selected>객실을 선택해 주세요.</option>
                                 <option value="Suite Room">Suite Room</option>
                                 <option value="Family Room">Family Room</option>
                                 <option value="Double Room">Double Room</option>
                                 <option value="Single Room">Single Room</option>
                                 <option value="Domitory">Domitory</option>
-                             </select>
+                             </select> <br>
                              <select size="10" style="width:250px;">
                              <c:forEach items="${list}" var="room">
                              	<option>${room.roomcode},${room.name},${room.type},${room.howmany},${room.howmuch}</option>
                              </c:forEach>
-                             </select>
+                             </select> <br>
                              <select size="10" style="width:250px;">
                              <c:forEach items="${roomType}" var="room">
-                             	<option>${room.typecode},${room.name}</option>
+                             	<option value="${room.typecode}">${room.name}</option>
                              </c:forEach>
-                             </select>
+                             </select> <br>
                                 <input type="button" value="찾기">
                         </td>
                     </tr>
