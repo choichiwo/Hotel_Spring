@@ -108,7 +108,9 @@ public class HomeController {
 		IRoom room=sqlSession.getMapper(IRoom.class);
 		ArrayList<Roominfo> roominfo=room.getRoomList();
 		model.addAttribute("list",roominfo);
-		System.out.println(roominfo);
+
+		ArrayList<Roomtype> roomtype=room.getRoomType();
+		model.addAttribute("roomType",roomtype);
 	      return "room";
 	   }
 	@RequestMapping("/logout")

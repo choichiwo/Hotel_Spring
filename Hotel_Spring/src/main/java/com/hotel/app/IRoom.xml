@@ -6,4 +6,7 @@
 	<select id="getRoomList" resultType="com.hotel.app.Roominfo">
 		select roomcode, name, type, howmany, howmuch from room order by name
 	</select>
+	<select id="getRoomType" resultType="com.hotel.app.Roomtype">
+		select name, typecode from roomtype order by typecode
+	</select>
 </mapper>

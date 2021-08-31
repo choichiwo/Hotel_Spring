@@ -46,7 +46,12 @@
                              	<option>${room.roomcode},${room.name},${room.type},${room.howmany},${room.howmuch}</option>
                              </c:forEach>
                              </select>
-                                <input type="submit" value="찾기">
+                             <select size="10" style="width:250px;">
+                             <c:forEach items="${roomType}" var="room">
+                             	<option>${room.typecode},${room.name}</option>
+                             </c:forEach>
+                             </select>
+                                <input type="button" value="찾기">
                         </td>
                     </tr>
                 </table>
