@@ -27,7 +27,7 @@
     <main>
         <div class="nav">
             <h2>객실목록</h2>
-                <select size="10" style="width:250px;">
+                <select id="roomlist" size="10" style="width:250px;">
                     <c:forEach items="${list}" var="room">
                     	<option value="${room.roomcode}">${room.roomname},${room.typename},${room.howmany},${room.howmuch}</option>
                     </c:forEach>
@@ -38,7 +38,7 @@
                 <table class="choices">
                     <tr>
                         <th>객실이름</th>
-                        <td><input type="text" name="room_name" size="20"></td>
+                        <td><input type="text" id="roomname" name="room_name" size="20"></td>
                     </tr>
                     <tr>
                         <th class="bunlyu">객실분류</th>
@@ -52,11 +52,11 @@
                     </tr>
                     <tr>
                         <th>숙박가능인원</th>
-                        <td><input type="number" name="a1" size="20">명</td>
+                        <td><input type="number" id="howmany" name="a1" size="20">명</td>
                     </tr>
                     <tr>
                         <th>1박요금</th>
-                        <td><input type="text" name="a1" size="20">원</td>
+                        <td><input type="text" id="howmuch" name="a1" size="20">원</td>
                     </tr>
                 </table>
             </div><!-- loom_choice -->
@@ -73,8 +73,20 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
 $(document)
-.ready(function(){
-	var list = ${list}.split(",");
-	var
+.on("click","#roomlist", function(){
+	var roomlist = $("#roomlist otion:selected").text(); //option값 가져오기
+	var roomlist1 = $("#roomlist").val(); //value에서 typecode 가져오기
+	var pk = String(roomlist1).split(" "); //typecode를 가져오기 위해 split
+	var type
+	var list = list.split(",");
+	
+	var roomname = list[0];
+	var roomtype = list[1];
+	var howmany = list[2];
+	var howmuch = list[3];
+	$("#roomname").append("roomname");
+	$("#howmany").val("howmany");
+	$("#howmuch").val("howmuch");
 })
+</script>
 </html>
