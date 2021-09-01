@@ -61,9 +61,9 @@
                 </table>
             </div><!-- loom_choice -->
             <div class="btns">
-                <input type="reset" value="등록" class="btn btn-check">
-                <input type="submit" value="삭제" class="btn btn-delete">
-                <input type="submit" value="초기화" class="btn btn-clear">
+                <input type="button" value="등록" id="btnAdd" class="btn btn-check">
+                <input type="button" value="삭제" id="btnDelete" class="btn btn-delete">
+                <input type="button" value="초기화" id="btnEmpty" class="btn btn-clear">
             </div><!-- btns -->
         </div><!-- choicesystem -->
     </main>
@@ -98,6 +98,11 @@ $(document)
 	} else if(typecode==4){
 		$("#roomtype").val(4).prop("selected", true);
 	}
+	return false;
+})
+.on("click","#btnEmpty", function(){
+	$("#roomname,#howmany,#howmuch,#roomtype").val("");
+	return false;
 })
 </script>
 </html>
