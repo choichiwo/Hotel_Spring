@@ -39,6 +39,7 @@
                     <tr>
                         <th>객실이름</th>
                         <td><input type="text" id="roomname" name="room_name" size="20"></td>
+                        <input type="hidden" id="roomcode">
                     </tr>
                     <tr>
                         <th class="bunlyu">객실분류</th>
@@ -79,6 +80,9 @@ $(document)
 	var pk = String(roomlist1).split(" "); //typecode를 가져오기 위해 split
 	var typecode = parseInt(pk[0]); //int로 타입변환
 	var list = String(roomlist).split(","); //option에서 가져온 값들 배열로 슬라이싱
+	
+	let code=$("#roomlist option").val();
+	$("#roomcode").val(code);
 	
 	var roomname = list[0];
 	var roomtype = list[1];
