@@ -28,9 +28,9 @@
         <div class="nav">
             <h2>객실목록</h2>
                 <select id="roomlist" size="10" style="width:250px;">
-                    <c:forEach items="${list}" var="room">
+                    <%-- <c:forEach items="${list}" var="room">
                     	<option value="${room.roomcode}">${room.roomname},${room.typename},${room.howmany},${room.howmuch}</option>
-                    </c:forEach>
+                    </c:forEach> --%>
                 </select>
     </div><!-- nav -->
         <div class="choicesystem">
@@ -73,6 +73,11 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
 $(document)
+.ready(function() {
+	$.post("http://localhost:8080/app/getRoomList",{},function(result){
+			console.log(result);
+	},"json");
+})
 .on("click","#roomlist", function(){
 	var roomlist = $("#roomlist option:selected").text(); //option값 가져오기
 	var roomlist1 = $("#roomlist").val(); //value에서 typecode 가져오기

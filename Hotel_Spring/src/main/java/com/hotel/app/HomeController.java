@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -108,13 +109,34 @@ public class HomeController {
 		}
 		// 여기서 interface호출하고 결과를 room.jsp에 전달.
 		IRoom room=sqlSession.getMapper(IRoom.class);
-		ArrayList<Roominfo> roominfo=room.getRoomList();
-		model.addAttribute("list",roominfo);
+//		ArrayList<Roominfo> roominfo=room.getRoomList();
+//		model.addAttribute("list",roominfo);
 
 		ArrayList<Roomtype> roomtype=room.getRoomType();
 		model.addAttribute("roomType",roomtype);
 	      return "room"; 
 	   }
+	@RequestMapping(value ="/getRoomList",method = RequestMethod.POST,
+				produces = "application/text; charset=utf-8")
+	@ResponseBody
+	public String getRoomList(HttpServletRequest hsr) {
+		IRoom room=sqlSession.getMapper(IRoom.class);
+		ArrayList<Roominfo> roominfo=room.getRoomList();
+		// 찾아진 데이터로 JSONArray만들기
+		JSONArray ja = new JSONArray();
+		for(int i=0;i<roominfo.size();i++) {
+			JSONObject jo= new JSONObject();
+			jo.put("rommcode", roominfo.get(i).getRoomcode());
+			jo.put("rommname", roominfo.get(i).getRoomname());
+			jo.put("typename", roominfo.get(i).getTypename());
+			jo.put("howmany", roominfo.get(i).getHowmany());
+			jo.put("howmuch", roominfo.get(i).getHowmuch());
+			ja.add(jo);
+		}
+		return ja.toString();
+	}
+	
+	
 	@RequestMapping("/logout")
 	   public String logout(HttpServletRequest hsr) {
 		HttpSession session = hsr.getSession();
