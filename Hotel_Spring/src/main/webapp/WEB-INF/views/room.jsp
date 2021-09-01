@@ -43,7 +43,7 @@
                     <tr>
                         <th class="bunlyu">객실분류</th>
                         <td>
-                        	<select size="10" style="width:250px;">
+                        	<select id="roomtype" size="10" style="width:250px;">
                              <c:forEach items="${roomType}" var="room">
                              	<option value="${room.typecode}">${room.name}</option>
                              </c:forEach>
@@ -52,7 +52,7 @@
                     </tr>
                     <tr>
                         <th>숙박가능인원</th>
-                        <td><input type="number" id="howmany" name="a1" size="20">명</td>
+                        <td><input type="text" id="howmany" name="a1" size="20">명</td>
                     </tr>
                     <tr>
                         <th>1박요금</th>
@@ -74,19 +74,30 @@
 <script>
 $(document)
 .on("click","#roomlist", function(){
-	var roomlist = $("#roomlist otion:selected").text(); //option값 가져오기
+	var roomlist = $("#roomlist option:selected").text(); //option값 가져오기
 	var roomlist1 = $("#roomlist").val(); //value에서 typecode 가져오기
 	var pk = String(roomlist1).split(" "); //typecode를 가져오기 위해 split
-	var type
-	var list = list.split(",");
+	var typecode = parseInt(pk[0]); //int로 타입변환
+	var list = String(roomlist).split(","); //option에서 가져온 값들 배열로 슬라이싱
 	
 	var roomname = list[0];
 	var roomtype = list[1];
 	var howmany = list[2];
 	var howmuch = list[3];
-	$("#roomname").append("roomname");
-	$("#howmany").val("howmany");
-	$("#howmuch").val("howmuch");
+	
+	$("#roomname").val(roomname);
+	$("#howmany").val(howmany);
+	$("#howmuch").val(howmuch);
+	
+	if(typecode==1){ //선택시 같은 type코드가 선택될수 있게 해줌. true가 선택됬다표시
+		$("#roomtype").val(1).prop("selected", true);
+	} else if(typecode==2){
+		$("#roomtype").val(2).prop("selected", true);
+	} else if(typecode==3){
+		$("#roomtype").val(3).prop("selected", true);
+	} else if(typecode==4){
+		$("#roomtype").val(4).prop("selected", true);
+	}
 })
 </script>
 </html>
