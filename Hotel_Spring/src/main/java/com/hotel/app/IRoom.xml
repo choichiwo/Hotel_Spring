@@ -14,4 +14,8 @@
 	<delete id="doDeleteRoom">
 		delete from room where roomcode=#{param1}
 	</delete>
+	<insert id="doAddRoom">
+		insert into room(roomcode,name,type,howmany,howmuch)
+		values(seqroom.nextval,#{param1},#{param2},#{param3},#{param4})
+	</insert>
 </mapper>

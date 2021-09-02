@@ -116,14 +116,39 @@ $(document)
 	return false;
 })
 .on("click","#btnEmpty", function(){
-	$("#roomname,#howmany,#howmuch,#roomtype").val("");
+	$("#roomname,#howmany,#howmuch,#roomtype,#roomcode").val("");
 	return false;
 })
 .on("click","#btnDelete", function(){
 	$.post("http://localhost:8081/app/deleteRoom",{roomcode:$('#roomcode').val()},
 			function(result){
 		console.log(result);
+		if(result=="ok"){
+			$('#btnEmpty').trigger('click'); //입력란 비우기
+			$('#roomlist option:selected').remove(); //room리스트에서 제거
+		}
+	},'text');
+	return false;
+})
+.on('click','#btnAdd',function(){
+	let roomname=$('#roomname').val();
+	let roomtype=$('#roomtype').val();
+	let howmany=$('#howmany').val();
+	let howmuch=$('#howmuch').val();
+	// validation (유효성검사)
+	if(roomname=='' || roomtype=='' || howmany=='' || howmuch==''){
+		alert('누락된 값이 있습니다.');
 		return false;
-},'json')
+	}
+	$.post("http://localhost:8081/app/addRoom",
+			{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+			function(result){
+		console.log(result);
+		if(result=="ok"){
+			location.reload();
+		}
+	},'text');
+	return false;
+})
 </script>
 </html>

@@ -144,6 +144,18 @@ public class HomeController {
 		room.doDeleteRoom(roomcode);
 		return "ok";
 	}
+	@RequestMapping(value ="/addRoom",method = RequestMethod.POST,
+			produces = "application/text; charset=utf-8")
+	@ResponseBody
+	public String addRoom(HttpServletRequest hsr) {
+		String rname=hsr.getParameter("roomname");
+		String rtype=hsr.getParameter("roomtype");
+		int howmany=Integer.parseInt(hsr.getParameter("howmany"));
+		int howmuch=Integer.parseInt(hsr.getParameter("howmuch"));
+		IRoom room=sqlSession.getMapper(IRoom.class);
+		room.doAddRoom(rname, rtype, howmany, howmuch);
+		return "ok";
+	}
 	
 	@RequestMapping("/logout")
 	   public String logout(HttpServletRequest hsr) {
