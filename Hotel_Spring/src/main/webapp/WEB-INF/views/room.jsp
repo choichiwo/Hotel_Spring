@@ -140,14 +140,27 @@ $(document)
 		alert('누락된 값이 있습니다.');
 		return false;
 	}
-	$.post("http://localhost:8081/app/addRoom",
-			{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
-			function(result){
-		console.log(result);
-		if(result=="ok"){
-			location.reload();
-		}
-	},'text');
+	let roomcode=$('#roomcode').val();
+	if(roomcode==''){ //insert
+		$.post("http://localhost:8081/app/addRoom",
+				{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+				function(result){
+			console.log(result);
+			if(result=="ok"){
+				location.reload();
+			}
+		},'text');
+	} else { // update
+		$.post("http://localhost:8081/app/updateRoom",
+				{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+				function(result){
+			console.log(result);
+			if(result=="ok"){
+				location.reload();
+			}
+		},'text');
+	}
+	
 	return false;
 })
 </script>
