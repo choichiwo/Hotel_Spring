@@ -76,8 +76,12 @@ $(document)
 .ready(function() {
 	$.post("http://localhost:8081/app/getRoomList",{},function(result){
 			console.log(result);
-			$each(result,function(ndx,value){
-				
+			$.each(result,function(ndx,value){
+				str='<option value="'+value['roomcode']+'">'+value['roomname']+','+value['typename']+','+value['howmany']+','+value['howmuch']+'</option>';
+				$("#roomlist").append(str);
+				/* str='<option value="${value['roomcode']}">${value['roomname']},
+				${value['typename']}${value['howmany']}${value['howmuch']}</option>';
+				<option value="2">백두산,Suite Room,8,500000</option>*/
 			});
 	},"json");
 })

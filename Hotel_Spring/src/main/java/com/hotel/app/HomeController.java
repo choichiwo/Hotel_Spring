@@ -68,9 +68,9 @@ public class HomeController {
 	      String userpw = hsr.getParameter("userpw");
 	      model.addAttribute("userid", userid);
 	      model.addAttribute("userpw", userpw);
-	      HttpSession session = hsr.getSession(); // session 사용가능하게 함
+	      HttpSession session = hsr.getSession(); // session �궗�슜媛��뒫�븯寃� �븿
 	      session.setAttribute("loginid", userid);
-	      return "redirect:/booking"; // RequestMapping의 경로이름
+	      return "redirect:/booking"; // RequestMapping�쓽 寃쎈줈�씠由�
 	   }
 	@RequestMapping(value="/booking", method=RequestMethod.GET)
 	   public String booking(HttpServletRequest hrs) {
@@ -107,7 +107,7 @@ public class HomeController {
 		if(session.getAttribute("loginid")==null) {
 			return "redirect:/home";
 		}
-		// 여기서 interface호출하고 결과를 room.jsp에 전달.
+		// �뿬湲곗꽌 interface�샇異쒗븯怨� 寃곌낵瑜� room.jsp�뿉 �쟾�떖.
 		IRoom room=sqlSession.getMapper(IRoom.class);
 //		ArrayList<Roominfo> roominfo=room.getRoomList();
 //		model.addAttribute("list",roominfo);
@@ -122,12 +122,12 @@ public class HomeController {
 	public String getRoomList(HttpServletRequest hsr) {
 		IRoom room=sqlSession.getMapper(IRoom.class);
 		ArrayList<Roominfo> roominfo=room.getRoomList();
-		// 찾아진 데이터로 JSONArray만들기
+		// 李얠븘吏� �뜲�씠�꽣濡� JSONArray留뚮뱾湲�
 		JSONArray ja = new JSONArray();
 		for(int i=0;i<roominfo.size();i++) {
 			JSONObject jo= new JSONObject();
-			jo.put("rommcode", roominfo.get(i).getRoomcode());
-			jo.put("rommname", roominfo.get(i).getRoomname());
+			jo.put("roomcode", roominfo.get(i).getRoomcode());
+			jo.put("roomname", roominfo.get(i).getRoomname());
 			jo.put("typename", roominfo.get(i).getTypename());
 			jo.put("howmany", roominfo.get(i).getHowmany());
 			jo.put("howmuch", roominfo.get(i).getHowmuch());
