@@ -74,8 +74,11 @@
 <script>
 $(document)
 .ready(function() {
-	$.post("http://localhost:8080/app/getRoomList",{},function(result){
+	$.post("http://localhost:8081/app/getRoomList",{},function(result){
 			console.log(result);
+			$each(result,function(ndx,value){
+				
+			});
 	},"json");
 })
 .on("click","#roomlist", function(){
