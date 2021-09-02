@@ -1,12 +1,23 @@
 package com.hotel.app;
 
 public class Roominfo {
-	   private int roomcode;
-	   private String roomname;
-	   private String typename;
-	   private int howmany;
-	   public int getRoomcode() {
-		return roomcode;
+    private int roomcode;
+    private String roomname;
+    private String typename;
+    private int howmany;
+    private int howmuch;
+	   
+	 public Roominfo() {}   
+	 public Roominfo(int roomcode, String roomname, String typename, int howmany, int howmuch) {
+		   this.roomcode = roomcode;
+		   this.roomname = roomname;
+		   this.typename = typename;
+		   this.howmany = howmany;
+		   this.howmuch = howmuch;
+	   }
+   
+   	public int getRoomcode() {
+	return roomcode;
 	}
 	public void setRoomcode(int roomcode) {
 		this.roomcode = roomcode;
@@ -35,16 +46,5 @@ public class Roominfo {
 	public void setHowmuch(int howmuch) {
 		this.howmuch = howmuch;
 	}
-	public Roominfo() {}
-		
-	private int howmuch;
-	   public Roominfo(int roomcode, String roomname, String typename, int howmany, int howmuch) {
-		this.roomcode = roomcode;
-		this.roomname = roomname;
-		this.typename = typename;
-		this.howmany = howmany;
-		this.howmuch = howmuch;
-	}
-	  
 
 	}

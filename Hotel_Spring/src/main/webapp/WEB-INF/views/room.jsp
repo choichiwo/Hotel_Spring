@@ -74,8 +74,15 @@
 <script>
 $(document)
 .ready(function() {
-	$.post("http://localhost:8080/app/getRoomList",{},function(result){
+	$.post("http://localhost:8081/app/getRoomList",{},function(result){
 			console.log(result);
+			$.each(result,function(ndx,value){
+				str='<option value="'+value['roomcode']+'">'+value['roomname']+','+value['typename']+','+value['howmany']+','+value['howmuch']+'</option>';
+				$("#roomlist").append(str);
+				/* str='<option value="${value['roomcode']}">${value['roomname']},
+				${value['typename']}${value['howmany']}${value['howmuch']}</option>';
+				<option value="2">백두산,Suite Room,8,500000</option>*/
+			});
 	},"json");
 })
 .on("click","#roomlist", function(){
@@ -109,7 +116,51 @@ $(document)
 	return false;
 })
 .on("click","#btnEmpty", function(){
-	$("#roomname,#howmany,#howmuch,#roomtype").val("");
+	$("#roomname,#howmany,#howmuch,#roomtype,#roomcode").val("");
+	return false;
+})
+.on("click","#btnDelete", function(){
+	$.post("http://localhost:8081/app/deleteRoom",{roomcode:$('#roomcode').val()},
+			function(result){
+		console.log(result);
+		if(result=="ok"){
+			$('#btnEmpty').trigger('click'); //입력란 비우기
+			$('#roomlist option:selected').remove(); //room리스트에서 제거
+		}
+	},'text');
+	return false;
+})
+.on('click','#btnAdd',function(){
+	let roomname=$('#roomname').val();
+	let roomtype=$('#roomtype').val();
+	let howmany=$('#howmany').val();
+	let howmuch=$('#howmuch').val();
+	// validation (유효성검사)
+	if(roomname=='' || roomtype=='' || howmany=='' || howmuch==''){
+		alert('누락된 값이 있습니다.');
+		return false;
+	}
+	let roomcode=$('#roomcode').val();
+	if(roomcode==''){ //insert
+		$.post("http://localhost:8081/app/addRoom",
+				{roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+				function(result){
+			console.log(result);
+			if(result=="ok"){
+				location.reload();
+			}
+		},'text');
+	} else { // update
+		$.post("http://localhost:8081/app/updateRoom",
+				{roomcode:roomcode,roomname:roomname,roomtype:roomtype,howmany:howmany,howmuch:howmuch},
+				function(result){
+			console.log(result);
+			if(result=="ok"){
+				location.reload();
+			}
+		},'text');
+	}
+	
 	return false;
 })
 </script>
