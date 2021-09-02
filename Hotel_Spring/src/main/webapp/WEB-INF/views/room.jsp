@@ -119,5 +119,11 @@ $(document)
 	$("#roomname,#howmany,#howmuch,#roomtype").val("");
 	return false;
 })
+.on("click","#btnDelete", function(){
+	$.post("http://localhost:8081/app/deleteRoom",{roomcode:$('#roomcode').val()},
+			function(result){
+		console.log(result);
+		return false;
+},'json')
 </script>
 </html>

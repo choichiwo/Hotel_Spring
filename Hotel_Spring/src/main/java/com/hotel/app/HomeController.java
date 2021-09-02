@@ -135,7 +135,15 @@ public class HomeController {
 		}
 		return ja.toString();
 	}
-	
+	@RequestMapping(value ="/deleteRoom",method = RequestMethod.POST,
+			produces = "application/text; charset=utf-8")
+	@ResponseBody
+	public String deleteRoom(HttpServletRequest hsr) {
+		int roomcode=Integer.parseInt(hsr.getParameter("roomcode"));
+		IRoom room=sqlSession.getMapper(IRoom.class);
+		room.doDeleteRoom(roomcode);
+		return "ok";
+	}
 	
 	@RequestMapping("/logout")
 	   public String logout(HttpServletRequest hsr) {

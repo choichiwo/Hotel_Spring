@@ -11,4 +11,7 @@
 	<select id="getRoomType" resultType="com.hotel.app.Roomtype">
 		select name, typecode from roomtype order by typecode
 	</select>
+	<delete id="doDeleteRoom">
+		delete from room where roomcode=#{param1}
+	</delete>
 </mapper>
